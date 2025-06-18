@@ -1,0 +1,105 @@
+/* Layout.css */
+
+/* --- General Resets & Body Styling --- */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; /* A clean, modern font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #F3F3F3; /* Consistent light grey background */
+  color: #333333; /* Default text color for general content */
+}
+
+/* --- Layout Container --- */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the layout takes full viewport height */
+  background-color: #F3F3F3; /* Light grey background for the whole app */
+}
+
+/* --- Header Styling --- */
+.main-header {
+  height: 90px; /* Reduced height for a more modern feel */
+  background-color: #2495FD; /* Vibrant blue header */
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  z-index: 1000; /* Ensures header stays on top */
+  position: sticky; /* Sticky header */
+  top: 0;
+  width: 100%;
+}
+
+.header-logo {
+  height: 70px; /* Adjusted logo size */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 20px; /* Space between logo and title */
+}
+
+.header-title {
+  color: #FFFFFF; /* White text for header title */
+  font-size: 26px; /* Slightly larger for prominence */
+  font-weight: 700; /* Bold and impactful */
+  letter-spacing: 0.5px;
+}
+
+/* --- Content Area (Sidebar + Main Content) --- */
+.content-area {
+  display: flex;
+  flex: 1; /* Allows content area to take remaining height */
+  width: 100%;
+}
+
+/* --- Main Content Area (where Outlet renders) --- */
+.main-content {
+  flex: 1; /* Takes up all available space next to the sidebar */
+  padding: 2.5rem; /* Increased padding for more breathing room */
+  background-color: #F3F3F3; /* Consistent light grey background */
+  overflow-y: auto; /* Enable scrolling for content if it overflows */
+  border-left: 1px solid #E0E0E0; /* Subtle border to separate from sidebar */
+  box-shadow: inset 2px 0 8px rgba(0, 0, 0, 0.05); /* Very subtle inner shadow for depth */
+}
+
+/* --- Responsive Adjustments (Optional but Recommended) --- */
+@media (max-width: 992px) {
+  .header-logo {
+    height: 60px;
+  }
+  .header-title {
+    font-size: 22px;
+  }
+  .main-header {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column; /* Stack logo and title on smaller screens */
+    height: auto;
+    padding: 15px 20px;
+    text-align: center;
+  }
+  .header-logo {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  .header-title {
+    font-size: 20px;
+  }
+  .content-area {
+    flex-direction: column; /* Stack sidebar and main content */
+  }
+  .main-content {
+    padding: 1.5rem;
+    border-left: none; /* Remove border when stacked */
+    box-shadow: none; /* Remove shadow when stacked */
+  }
+}
+
+/* Add Google Fonts import to your public/index.html or main CSS file */
+/* Example for index.html <head>:
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+*/

@@ -7,9 +7,10 @@ import RegisterPage from './pages/RegisterPage';
 import ProtectedRoute from './protected/ProtectedRoute';
 import Layout from './protected/Layout';
 import dashboardRoutes from './routes/dashboardRoutes';
-
+import { AuthProvider } from './context/AuthContext';
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<LoginPage />} />
@@ -24,6 +25,7 @@ function App() {
       </Routes>
       <ToastContainer />
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 
