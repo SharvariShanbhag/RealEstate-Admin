@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-// Removed FaHome as Dashboard is removed. Added FaCrown for a new header icon.
-import { FaUser, FaBuilding, FaSignOutAlt, FaCrown } from "react-icons/fa";
+// Import all necessary icons, including FaQuestionCircle for inquiries
+import { FaUser, FaBuilding, FaSignOutAlt, FaCrown, FaQuestionCircle } from "react-icons/fa";
 import { logoutAPI } from '../../API/Api.js'; // Ensure this path is correct
 
 const Sidebar = () => {
@@ -47,7 +47,7 @@ const Sidebar = () => {
         padding: "2rem 1.5rem", // Padding inside the sidebar
         boxShadow: "4px 0 15px rgba(0, 0, 0, 0.15)", // Subtle shadow for depth
         fontFamily: "'Open Sans', sans-serif", // Consistent font
-        // Removed vh-100: The sidebar's height will now adjust based on its content
+        // The sidebar's height will now adjust based on its content
         // and its parent container's layout. If you want it to stretch vertically
         // with the main content area, ensure its parent uses flexbox/grid and allows stretching.
       }}
@@ -77,9 +77,7 @@ const Sidebar = () => {
         </h4>
       </div>
 
-      <ul className="list-unstyled"> {/* Removed flex-grow-1 as logout position is changed */}
-        {/* Dashboard link removed as per request */}
-
+      <ul className="list-unstyled">
         <li className="mb-2"> {/* mb-2 for consistent vertical spacing between links */}
           <NavLink
             to="/profile"
@@ -113,30 +111,45 @@ const Sidebar = () => {
           </NavLink>
         </li>
 
-        {/* Logout button moved directly below properties, within the ul */}
+        {/* NEW: Inquiries Link - Added back from previous correction */}
+        <li className="mb-2">
+          <NavLink
+            to="/inquiries" 
+            className={({ isActive }) => `nav-link ${isActive ? "active-sidebar-link" : ""}`}
+            style={({ isActive }) => ({
+              ...linkBaseStyle,
+              ...(isActive ? activeLinkStyle : inactiveLinkStyle),
+            })}
+            onMouseEnter={(e) => { !e.currentTarget.classList.contains('active-sidebar-link') && (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'); }}
+            onMouseLeave={(e) => { !e.currentTarget.classList.contains('active-sidebar-link') && (e.currentTarget.style.backgroundColor = 'transparent'); }}
+          >
+            <FaQuestionCircle className="me-3 fs-5" /> {/* Using FaQuestionCircle for inquiries */}
+            Inquiries
+          </NavLink>
+        </li>
+
         <li className="mt-4"> {/* Added top margin to separate it from the previous links */}
-            <button
-                onClick={handleLogout}
-                className="nav-link" // Keep Bootstrap's nav-link class for basic alignment
-                style={{
-                    ...linkBaseStyle, // Apply base link styles for consistency
-                    background: "none", // Remove default button background
-                    border: "none", // Remove default button border
-                    color: "#FFFFFF",
-                    textAlign: "left", // Align text to the left
-                    cursor: "pointer",
-                    width: "100%", // Make button take full width of its container
-                }}
-                // Specific hover effects for the logout button
-                onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; }}
-                onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; }}
-            >
-                <FaSignOutAlt className="me-3 fs-5" />
-                Logout
-            </button>
+          <button
+            onClick={handleLogout}
+            className="nav-link" // Keep Bootstrap's nav-link class for basic alignment
+            style={{
+              ...linkBaseStyle, // Apply base link styles for consistency
+              background: "none", // Remove default button background
+              border: "none", // Remove default button border
+              color: "#FFFFFF",
+              textAlign: "left", // Align text to the left
+              cursor: "pointer",
+              width: "100%", // Make button take full width of its container
+            }}
+            // Specific hover effects for the logout button
+            onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; }}
+            onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; }}
+          >
+            <FaSignOutAlt className="me-3 fs-5" />
+            Logout
+          </button>
         </li>
       </ul>
-      {/* The div with mt-auto is removed as logout is now within the ul */}
     </div>
   );
 };
